@@ -11,19 +11,32 @@ namespace Unity.Vfx.Cameras.Model
 	/// </summary>
 	public class MathematicalModel
 	{
-		public virtual void ForceAFOV(float afov, ref PhysicalCameraModel camera)
+
+		#region Limits
+		public virtual float MaxVFOV { get { return 179f; } }
+		public virtual float MinVFOV { get { return 1f; } }
+
+		public virtual float MaxAspectRatio(PhysicalCameraModel camera)
 		{
-			camera.m_Lens.m_FocalLength = camera.m_Body.m_SensorWidth/ToRad(afov);
+			return camera.Body.m_SensorWidth/(ToRad(MaxVFOV)*camera.Lens.m_FocalLength);
 		}
 
-		public virtual void ComputeDependants(ref PhysicalCameraModel camera)
+		#endregion
+
+		public float ClampVerticalFOV( float fov )
 		{
-			
+			return fov < MinVFOV ? MinVFOV : fov > MaxVFOV ? MaxVFOV : fov;
 		}
 
-		public float ComputerHAFOV(ref PhysicalCameraModel camera )
+
+		public virtual void ApplyVerticalFOV(float afov, PhysicalCameraModel camera)
 		{
-			return ToDeg(camera.m_Body.m_SensorWidth/ camera.m_Lens.m_FocalLength);
+			camera.Lens.m_FocalLength = camera.Body.m_SensorHeight/ToRad(afov);
+		}
+
+		public float VerticalFOV(PhysicalCameraModel camera )
+		{
+			return ToDeg(camera.Body.m_SensorHeight/ camera.Lens.m_FocalLength);
 		}
 
 		private float ToRad(float rads)
@@ -35,6 +48,8 @@ namespace Unity.Vfx.Cameras.Model
 		{
 			return (float)(degrees * 180 / Math.PI);
 		}
+
+
 
 	}
 
