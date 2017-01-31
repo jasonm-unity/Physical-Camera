@@ -26,6 +26,8 @@ namespace Unity.Vfx.Cameras
 				"Assets/VFx-Camera/Scripts/Model/StereoPhysicalCameraModel.cs",
 
 				"Assets/VFx-Camera/Scripts/Editor/PhysicalCameraEditor.cs",
+
+				"Assets/VFx-Camera/Cameras/Full Frame - 24mm (default).prefab"
 			};
 			AssetDatabase.ExportPackage(files, "VFX-PhysicalCameras.unitypackage", ExportPackageOptions.Recurse);
 		}
