@@ -166,7 +166,7 @@ namespace Unity.Vfx.Cameras.Editor
 			}
 
 			property = bodyModel.FindPropertyRelative(GetName(() => bodyModelObj.m_ShutterAngle));
-			AddIntSlider(property, "Shutter angle", "For motion blur, dictates the angle of the shutters opening.", null, 15, 360);
+			AddIntSlider(property, "Shutter angle", "Defines the ‘shutter speed’, driving the postFX motion blur parameter. [For future use]", null, 15, 360);
 
 			property = bodyModel.FindPropertyRelative(GetName(() => bodyModelObj.m_ISO));
 			AddIntProperty(property, "ISO", "A measure of the sensitivity of the image sensor. [For future use]", (o, n) => n < 25 ? 25 : n > 25600 ? 25600 : n);
@@ -175,15 +175,15 @@ namespace Unity.Vfx.Cameras.Editor
 			AddBoolProperty(property, "HDR", "Toggles extended dynamic range of generated images.");
 
 			property = bodyModel.FindPropertyRelative(GetName(() => bodyModelObj.m_LensShiftX));
-			AddFloatSlider(property, "Lens Shift X", "[For future use]", null, 1f, -1f, 1f);
+			AddFloatSlider(property, "Lens Shift X", "A displacement of the render frustum parallel to the image plane. Useful for perspective control architectural rendering. [For future use]", null, 1f, -1f, 1f);
 
 			property = bodyModel.FindPropertyRelative(GetName(() => bodyModelObj.m_LensShiftY));
-			AddFloatSlider(property, "Lens Shift Y", "[For future use]", null, 1f, -1f, 1f);
+			AddFloatSlider(property, "Lens Shift Y", "A displacement of the render frustum parallel to the image plane.  Useful for perspective control architectural rendering. [For future use]", null, 1f, -1f, 1f);
 
 			GUI.enabled = camObj.Model.m_ProjectionMode < EProjectionMode.Ortographic;
 			{
 				property = bodyModel.FindPropertyRelative(GetName(() => bodyModelObj.m_PerspectiveCorrection));
-				AddFloatSlider(property, "Perspective Correction", "[For future use]", null, 1f, -1f, 1f);
+				AddFloatSlider(property, "Perspective Correction", "This rotates the render frustum on the x-axis to compensate for perpective distortion. [For future use]", null, 1f, -1f, 1f);
 			}
 			GUI.enabled = true;
 
@@ -206,7 +206,7 @@ namespace Unity.Vfx.Cameras.Editor
 			GUI.enabled = true;
 
 			property = lensModel.FindPropertyRelative(GetName(() => lensModelObj.m_FStop));
-			AddFloatSlider(property, "F-Stop", "Ratio of the lens's focal length to the diameter of the lens's entrance pupil. [For future use]", null, 1f, 0.7f, 64f);
+			AddFloatSlider(property, "f-Stop", "Ratio of the lens's focal length to the diameter of the lens's entrance pupil. [For future use]", null, 1f, 0.7f, 64f);
 
 			DrawOctaneModel(lensModel);
 		}
